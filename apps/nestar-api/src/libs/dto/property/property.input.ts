@@ -1,6 +1,6 @@
 import { InputType, Field, Int } from '@nestjs/graphql';
 import { IsNotEmpty, IsOptional, Length, IsIn, Min } from 'class-validator';
-import { PropertyType, PropertyLocation, PropertyStatus } from '../../enums/property.enum';
+import { PropertyTransmission, PropertyBrand, PropertyStatus, PropertyFuel, PropertyColor } from '../../enums/property.enum';
 import { ObjectId } from 'mongoose';
 import { availableOptions, availablePropertySorts } from '../../config';
 import { Direction } from '../../enums/common.enum';
@@ -8,17 +8,29 @@ import { Direction } from '../../enums/common.enum';
 @InputType()
 export class PropertyInput {
 	@IsNotEmpty()
-	@Field(() => PropertyType)
-	propertyType: PropertyType;
+	@Field(() => PropertyTransmission)
+	propertyTransmission: PropertyTransmission;
 
 	@IsNotEmpty()
-	@Field(() => PropertyLocation)
-	propertyLocation: PropertyLocation;
+	@Field(() => PropertyBrand)
+	propertyBrand: PropertyBrand;
+
+	@IsNotEmpty()
+	@Field(() => PropertyFuel)
+	propertyFuel: PropertyFuel;
+
+	@IsNotEmpty()
+	@Field(() => PropertyColor)
+	propertyColor: PropertyColor;
 
 	@IsNotEmpty()
 	@Length(3, 100)
 	@Field(() => String)
 	propertyAddress: string;
+
+	@IsNotEmpty()
+	@Field(() => Number)
+	propertyOdometer: number;
 
 	@IsNotEmpty()
 	@Length(3, 100)
@@ -31,17 +43,7 @@ export class PropertyInput {
 
 	@IsNotEmpty()
 	@Field(() => Number)
-	propertySquare: number;
-
-	@IsNotEmpty()
-	@Min(1)
-	@Field(() => Int)
-	propertyBeds: number;
-
-	@IsNotEmpty()
-	@Min(1)
-	@Field(() => Int)
-	propertyRooms: number;
+	propertyYear: number;
 
 	@IsNotEmpty()
 	@Field(() => [String])
@@ -54,7 +56,7 @@ export class PropertyInput {
 
 	@IsOptional()
 	@Field(() => Boolean, { nullable: true })
-	propertyBarter?: boolean;
+	propertySell?: boolean;
 
 	@IsOptional()
 	@Field(() => Boolean, { nullable: true })
@@ -77,7 +79,7 @@ export class PricesRange {
 }
 
 @InputType()
-export class SquaresRange {
+export class YearsRange {
 	@Field(() => Int)
 	start: number;
 
@@ -85,6 +87,14 @@ export class SquaresRange {
 	end: number;
 }
 
+@InputType()
+export class OdometersRange {
+	@Field(() => Int)
+	start: number;
+
+	@Field(() => Int)
+	end: number;
+}
 @InputType()
 export class PeriodsRange {
 	@Field(() => Date)
@@ -100,20 +110,20 @@ class PISearch {
 	memberId?: ObjectId;
 
 	@IsOptional()
-	@Field(() => [PropertyLocation], { nullable: true })
-	locationList?: PropertyLocation[];
+	@Field(() => [PropertyBrand], { nullable: true })
+	brandList?: PropertyBrand[];
 
 	@IsOptional()
-	@Field(() => [PropertyType], { nullable: true })
-	typeList?: PropertyType[];
+	@Field(() => [PropertyTransmission], { nullable: true })
+	transmissionList?: PropertyTransmission[];
 
 	@IsOptional()
-	@Field(() => [Int], { nullable: true })
-	roomsList?: Number[];
+	@Field(() => [PropertyFuel], { nullable: true })
+	fuelList?: PropertyFuel[];
 
 	@IsOptional()
-	@Field(() => [Int], { nullable: true })
-	bedsList?: Number[];
+	@Field(() => [PropertyColor], { nullable: true })
+	colorList?: PropertyColor[];
 
 	@IsOptional()
 	@IsIn(availableOptions, { each: true })
@@ -125,12 +135,16 @@ class PISearch {
 	pricesRange?: PricesRange;
 
 	@IsOptional()
+	@Field(() => YearsRange, { nullable: true })
+	yearsRange?: YearsRange;
+
+	@IsOptional()
 	@Field(() => PeriodsRange, { nullable: true })
 	periodsRange?: PeriodsRange;
 
 	@IsOptional()
-	@Field(() => SquaresRange, { nullable: true })
-	squaresRange?: SquaresRange;
+	@Field(() => OdometersRange, { nullable: true })
+	odometerRange?: OdometersRange;
 
 	@IsOptional()
 	@Field(() => String, { nullable: true })
@@ -203,8 +217,8 @@ class ALPISearch {
 	propertyStatus?: PropertyStatus;
 
 	@IsOptional()
-	@Field(() => [PropertyLocation], { nullable: true })
-	propertyLocationList?: PropertyLocation[];
+	@Field(() => [PropertyBrand], { nullable: true })
+	propertyBrandList?: PropertyBrand[];
 }
 
 @InputType()

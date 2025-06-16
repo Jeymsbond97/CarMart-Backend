@@ -1,11 +1,11 @@
 import { Schema } from 'mongoose';
-import { PropertyLocation, PropertyStatus, PropertyType } from '../libs/enums/property.enum';
+import { PropertyBrand, PropertyColor, PropertyFuel, PropertyStatus, PropertyTransmission } from '../libs/enums/property.enum';
 
 const PropertySchema = new Schema(
 	{
-		propertyType: {
+		propertyTransmission: {
 			type: String,
-			enum: PropertyType,
+			enum: PropertyTransmission,
 			required: true,
 		},
 
@@ -15,9 +15,21 @@ const PropertySchema = new Schema(
 			default: PropertyStatus.ACTIVE,
 		},
 
-		propertyLocation: {
+		propertyBrand: {
 			type: String,
-			enum: PropertyLocation,
+			enum: PropertyBrand,
+			required: true,
+		},
+
+		propertyColor: {
+			type: String,
+			enum: PropertyColor,
+			required: true,
+		},
+
+		propertyFuel: {
+			type: String,
+			enum: PropertyFuel,
 			required: true,
 		},
 
@@ -36,17 +48,12 @@ const PropertySchema = new Schema(
 			required: true,
 		},
 
-		propertySquare: {
+		propertyYear: {
 			type: Number,
 			required: true,
 		},
 
-		propertyBeds: {
-			type: Number,
-			required: true,
-		},
-
-		propertyRooms: {
+		propertyOdometer: {
 			type: Number,
 			required: true,
 		},
@@ -80,7 +87,7 @@ const PropertySchema = new Schema(
 			type: String,
 		},
 
-		propertyBarter: {
+		propertySell: {
 			type: Boolean,
 			default: false,
 		},
@@ -111,6 +118,6 @@ const PropertySchema = new Schema(
 	{ timestamps: true, collection: 'properties' },
 );
 
-PropertySchema.index({ propertyType: 1, propertyLocation: 1, propertyTitle: 1, propertyPrice: 1 }, { unique: true });
+PropertySchema.index({ propertyType: 1, propertyTransmission: 1, propertyTitle: 1, propertyPrice: 1 }, { unique: true });
 
 export default PropertySchema;

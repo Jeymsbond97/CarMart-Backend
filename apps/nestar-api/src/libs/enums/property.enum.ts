@@ -1,14 +1,39 @@
 import { registerEnumType } from '@nestjs/graphql';
 
-export enum PropertyType {
-	APARTMENT = 'APARTMENT',
-	VILLA = 'VILLA',
-	HOUSE = 'HOUSE',
+export enum PropertyTransmission {
+	AVTOMATIC = 'AVTOMATIC',
+	MANUAL = 'MANUAL',
 }
-registerEnumType(PropertyType, {
-	name: 'PropertyType',
+registerEnumType(PropertyTransmission, {
+	name: 'PropertyTransmission',
 });
 
+export enum PropertyFuel {
+	PETROL = 'PETROL',
+	LPG = 'LPG',
+	HYBRID = 'HYBRID',
+	ELECTRIC = 'ELECTRIC'
+}
+registerEnumType(PropertyFuel, {
+	name: 'PropertyFuel',
+});
+
+export enum PropertyColor {
+	WHITE = 'WHITE',
+	BLACK = 'BLACK',
+	SILVER = 'SILVER',
+	RED = 'RED',
+	GREEN = 'GREEN',
+	GOLD = 'GOLD',
+	YELLOW = 'YELLOW',
+	ORANGE = 'ORANGE',
+	BROWN = 'BROWN',
+	BLUE = 'BLUE',
+	GRAY = 'GRAY'
+}
+registerEnumType(PropertyColor, {
+	name: 'PropertyColor',
+});
 export enum PropertyStatus {
 	ACTIVE = 'ACTIVE',
 	SOLD = 'SOLD',
@@ -18,17 +43,18 @@ registerEnumType(PropertyStatus, {
 	name: 'PropertyStatus',
 });
 
-export enum PropertyLocation {
-	SEOUL = 'SEOUL',
-	BUSAN = 'BUSAN',
-	INCHEON = 'INCHEON',
-	DAEGU = 'DAEGU',
-	GYEONGJU = 'GYEONGJU',
-	GWANGJU = 'GWANGJU',
-	CHONJU = 'CHONJU',
-	DAEJON = 'DAEJON',
-	JEJU = 'JEJU',
+export enum PropertyBrand {
+	KIA = 'KIA',
+	GENESIS = 'GENESIS',
+	BMW = 'BMW',
+	TESLA = 'TESLA',
+	FERRARI = 'FERRARI',
+	JAGUAR = 'JAGUAR',
+	ROLLS_ROYCE = 'ROLLS_ROYCE',
+	VOLVO = 'VOLVO',
+	AUDI = 'AUDI',
+	MERCEDES = 'MERCEDES',
 }
-registerEnumType(PropertyLocation, {
-	name: 'PropertyLocation',
+registerEnumType(PropertyBrand, {
+	name: 'PropertyBrand',
 });
