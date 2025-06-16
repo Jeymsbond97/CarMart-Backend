@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Member } from 'apps/nestar-api/src/libs/dto/member/member';
-import { Property } from 'apps/nestar-api/src/libs/dto/property/property';
-import { MemberStatus, MemberType } from 'apps/nestar-api/src/libs/enums/member.enum';
-import { PropertyStatus } from 'apps/nestar-api/src/libs/enums/property.enum';
+import { Member } from 'apps/carmart-api/src/libs/dto/member/member';
+import { Property } from 'apps/carmart-api/src/libs/dto/property/property';
+import { MemberStatus, MemberType } from 'apps/carmart-api/src/libs/enums/member.enum';
+import { PropertyStatus } from 'apps/carmart-api/src/libs/enums/property.enum';
 import { Model } from 'mongoose';
 
 @Injectable()
@@ -29,7 +29,7 @@ export class BatchService {
 			.updateMany(
 				{
 					memberStatus: MemberStatus.ACTIVE,
-					memberType: MemberType.AGENT,
+					memberType: MemberType.COMPANY,
 				},
 				{
 					memberRank: 0,
@@ -57,7 +57,7 @@ export class BatchService {
 	public async batchTopAgents(): Promise<void> {
 		const agents: Member[] = await this.memberModel
 			.find({
-				memberType: MemberType.AGENT,
+				memberType: MemberType.COMPANY,
 				memberStatus: MemberStatus.ACTIVE,
 				memberRank: 0,
 			})

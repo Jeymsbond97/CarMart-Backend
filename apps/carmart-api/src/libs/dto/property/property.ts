@@ -1,6 +1,6 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { ObjectId } from 'mongoose';
-import { PropertyType, PropertyStatus, PropertyLocation } from '../../enums/property.enum';
+import { PropertyStatus, PropertyBrand, PropertyTransmission, PropertyColor, PropertyFuel } from '../../enums/property.enum';
 import { Member, TotalCounter } from '../member/member';
 import { MeLiked } from '../like/like';
 
@@ -9,14 +9,23 @@ export class Property {
 	@Field(() => String)
 	_id: ObjectId;
 
-	@Field(() => PropertyType)
-	propertyType: PropertyType;
+	@Field(() => PropertyTransmission)
+	propertyTransmission: PropertyTransmission;
 
 	@Field(() => PropertyStatus)
 	propertyStatus: PropertyStatus;
 
-	@Field(() => PropertyLocation)
-	propertyLocation: PropertyLocation;
+	@Field(() => PropertyBrand)
+	propertyBrand: PropertyBrand;
+
+	@Field(() => PropertyColor)
+	propertyColor: PropertyColor;
+
+	@Field(() => PropertyFuel)
+	propertyFuel: PropertyFuel;
+
+	@Field(() => String)
+	propertyOdometer: string;
 
 	@Field(() => String)
 	propertyAddress: string;
@@ -27,14 +36,8 @@ export class Property {
 	@Field(() => Number)
 	propertyPrice: number;
 
-	@Field(() => Number)
-	propertySquare: number;
-
-	@Field(() => Int)
-	propertyBeds: number;
-
-	@Field(() => Int)
-	propertyRooms: number;
+    @Field(() => Number)
+	propertyYear: number;
 
 	@Field(() => Int)
 	propertyViews: number;
@@ -55,7 +58,7 @@ export class Property {
 	propertyDesc?: string;
 
 	@Field(() => Boolean)
-	propertyBarter: boolean;
+	propertySell: boolean;
 
 	@Field(() => Boolean)
 	propertyRent: boolean;

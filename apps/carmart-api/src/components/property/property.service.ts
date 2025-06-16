@@ -5,6 +5,7 @@ import { Properties, Property } from '../../libs/dto/property/property';
 import {
 	AgentPropertiesInquiry,
 	AllPropertiesInquiry,
+	OdometersRange,
 	OrdinaryInquiry,
 	PropertiesInquiry,
 	PropertyInput,
@@ -98,7 +99,7 @@ export class PropertyService {
 		const sort: T = { [input?.sort ?? 'createdAt']: input.direction ?? Direction.DESC };
 
 		this.shapeMatchQuery(match, input);
-	
+
 
 		const result = await this.propertyModel
 			.aggregate([
@@ -127,25 +128,26 @@ export class PropertyService {
 	private shapeMatchQuery(match: T, input: PropertiesInquiry): void {
 		const {
 			memberId,
-			locationList,
-			roomsList,
-			bedsList,
-			typeList,
+			brandList,
+			transmissionList,
+			fuelList,
+			colorList,
 			periodsRange,
 			pricesRange,
-			squaresRange,
+			yearsRange,
+			odometerRange,
 			options,
 			text,
 		} = input.search;
 		if (memberId) match.memberId = shapeIntoMongoObjectId(memberId);
-		if (locationList && locationList.length) match.propertyLocation = { $in: locationList };
-		if (roomsList && roomsList.length) match.propertyRooms = { $in: roomsList };
-		if (bedsList && bedsList.length) match.propertyBeds = { $in: bedsList };
-		if (typeList && typeList.length) match.propertyType = { $in: typeList };
-
+		if (brandList?.length) match.propertyBrand = { $in: brandList };
+		if (transmissionList?.length) match.propertyTransmission = { $in: transmissionList };
+		if (fuelList?.length) match.propertyFuel = { $in: fuelList };
+		if (colorList?.length) match.propertyColor = { $in: colorList };
 		if (pricesRange) match.propertyPrice = { $gte: pricesRange.start, $lte: pricesRange.end };
 		if (periodsRange) match.createdAt = { $gte: periodsRange.start, $lte: periodsRange.end };
-		if (squaresRange) match.propertySquare = { $gte: squaresRange.start, $lte: squaresRange.end };
+		if (yearsRange) match.propertyYear = { $gte: yearsRange.start, $lte: yearsRange.end };
+		if (odometerRange) match.propertyOdometer = { $gte: odometerRange.start, $lte: yearsRange.end };
 
 		if (text) match.propertyTitle = { $regex: new RegExp(text, 'i') };
 		if (options) {
@@ -217,12 +219,12 @@ export class PropertyService {
 	}
 
 	public async getAllPropertiesByAdmin(input: AllPropertiesInquiry): Promise<Properties> {
-		const { propertyStatus, propertyLocationList } = input.search;
+		const { propertyStatus, propertyBrandList } = input.search;
 		const match: T = {};
 		const sort: T = { [input?.sort ?? 'createdAt']: input?.direction ?? Direction.DESC };
 
 		if (propertyStatus) match.propertyStatus = propertyStatus;
-		if (propertyLocationList) match.propertyLocation = { $in: propertyLocationList };
+		if (propertyBrandList) match.propertyBrand = { $in: propertyBrandList };
 
 		const result = await this.propertyModel
 			.aggregate([
