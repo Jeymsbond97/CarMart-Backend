@@ -92,12 +92,12 @@ export class PropertyResolver {
 	@Roles(MemberType.COMPANY)
 	@UseGuards(RolesGuard)
 	@Query((returns) => Properties)
-	public async getAgentProperties(
+	public async getCompanyProperties(
 		@Args('input') input: AgentPropertiesInquiry,
 		@AuthMember('_id') memberId: ObjectId,
 	): Promise<Properties> {
 		console.log('Query: getAgentProperties');
-		return await this.propertyService.getAgentProperties(memberId, input);
+		return await this.propertyService.getCompanyProperties(memberId, input);
 	}
 
 	@UseGuards(AuthGuard)

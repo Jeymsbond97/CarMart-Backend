@@ -165,7 +165,7 @@ export class PropertyService {
 		return await this.viewService.getVisitedPropeties(memberId, input);
 	}
 
-	public async getAgentProperties(memberId: ObjectId, input: AgentPropertiesInquiry): Promise<Properties> {
+	public async getCompanyProperties(memberId: ObjectId, input: AgentPropertiesInquiry): Promise<Properties> {
 		const { propertyStatus } = input.search;
 		if (propertyStatus === PropertyStatus.DELETE) throw new BadRequestException(Message.NOT_ALLOWED_REQUEST);
 
