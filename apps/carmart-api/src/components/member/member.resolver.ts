@@ -47,7 +47,7 @@ export class MemberResolver {
 		return `Hi ${memberNick}`;
 	}
 
-	@Roles(MemberType.USER, MemberType.COMPANY)
+	@Roles(MemberType.USER, MemberType.DEALER)
 	@UseGuards(RolesGuard)
 	@Query(() => String)
 	public async checkAuthRoles(

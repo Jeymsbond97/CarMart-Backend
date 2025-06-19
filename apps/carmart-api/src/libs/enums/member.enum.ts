@@ -2,7 +2,7 @@ import { registerEnumType } from '@nestjs/graphql';
 
 export enum MemberType {
 	USER = 'USER',
-	COMPANY = 'COMPANY',
+	DEALER = 'DEALER',
 	ADMIN = 'ADMIN',
 }
 
