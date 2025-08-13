@@ -41,7 +41,7 @@ export class BatchController {
 	public async batchTopAgents() {
 		try {
 			this.logger['context'] = BATCH_TOP_AGENTS;
-			this.logger.debug('EXECUTED');
+			this.logger.debug('EXECUTED-Dealer');
 			await this.batchService.batchTopAgents();
 		} catch (err) {
 			this.logger.error(err);
