@@ -4,7 +4,7 @@ services:
   carmart-api:
     container_name: carmart-api
     restart: always
-    image: node:20.0.0
+    image: node:20.10.0
     ports:
       - 4001:3002
     volumes:
@@ -17,6 +17,22 @@ services:
     #FOR PRODUCTION
     command: bash -c "npm install && npm run build && npm run start:prod"
 
+  carmart-batch:
+    container_name: carmart-batch
+    restart: unless-stopped
+    image: node:20.10.0
+    ports:
+      - 4002:3003
+    volumes:
+      - ./:/usr/src/carmart
+    working_dir: /usr/src/carmart
+
+    networks:
+      - monorepo_network
+
+    #FOR PRODUCTION
+    command: bash -c "npm install && npm run build && npm run start:prod:batch"
+
 networks:
   monorepo_network:
     driver: bridge
@@ -27,5 +43,6 @@ networks:
 
 
 
-
-    #carmart-next: localhost: 4000 => container:3001
+    #carmart-next:  localhost: 4000 => container:3002
+    #carmart-api:   localhost: 4001 => container:3002
+    #carmart-batch: localhost: 4002 => container:3003
