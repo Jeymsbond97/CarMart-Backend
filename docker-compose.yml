@@ -1,4 +1,4 @@
-version: "3.3"
+
 
 services:
   carmart-api:
@@ -46,3 +46,14 @@ networks:
     #carmart-next:  localhost: 4000 => container:3002
     #carmart-api:   localhost: 4001 => container:3002
     #carmart-batch: localhost: 4002 => container:3003
+
+
+    #  DOCKER COMPOSE METHODS:
+
+    # docker compose up -up
+    # docker compose stop
+    # docker compose start
+    # docker compose restart
+    # docker compose stop &&  # docker compose rm -f
+
+    # It's all work in vs code terminal (orqa fonda ishlaydi)
